@@ -1,20 +1,44 @@
-import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { useState } from "react";
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 export default function App() {
-  const [number1, setNumber1] = useState(0)
-  const addToNumber = () => {
-    setNumber1(number1 + 1)
-  }
+  const [notification, setNotification] = useState("Player X to start");
+  const [refresh, setRefresh] = useState(false);
+  const [board, setBoard] = useState([
+    "X",
+    " ",
+    " ",
+    " ",
+    "O",
+    " ",
+    " ",
+    " ",
+    " X",
+  ]);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.txt}>The Number is: {number1}</Text>
-      <TouchableOpacity style={styles.button1} onPress={() => addToNumber()}>
-      <Text style={styles.txt2}>Add</Text>
-      </TouchableOpacity>
       <StatusBar style="auto" />
+      <Text style={styles.txt1}>TicTacToe</Text>
+      <Text style={styles.txt2}>{notification}</Text>
+      <FlatList
+        style={styles.list}
+        data={board}
+        numColumns={3}
+        extraData={refresh}
+        renderItem={({item, inde}) => (
+          <TouchableOpacity style={styles.square}>
+            <Text>{item}</Text>
+          </TouchableOpacity>
+        )}
+      />
     </View>
   );
 }
@@ -22,22 +46,31 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
-  txt:{
-    fontSize:25,
+  txt1: {
+    fontSize: 50,
   },
-  txt2:{
-    fontSize:45,
-    color: 'white',
+  txt2: {
+    fontSize: 20,
   },
-  button1:{
-    backgroundColor: 'blue',
-    fontSize:45,
+  button1: {
+    backgroundColor: "blue",
+    fontSize: 45,
     padding: 5,
     borderRadius: 10,
     margin: 10,
   },
+  list: {
+    width: 300,
+    height: 400,
+  },
+  square: {
+    height:60,
+    width: 40,
+    backgroundColor: "blue",
+    margin: 10,
+  }
 });
