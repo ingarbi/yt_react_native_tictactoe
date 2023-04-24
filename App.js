@@ -80,7 +80,7 @@ export default function App() {
       <Text style={styles.txt1}>TicTacToe</Text>
       <Text style={styles.txt2}>{notification}</Text>
       
-      <View>
+      <View style={styles.flatListContainer}>
       <Image source={require('./assets/bg.png')} style={styles.image}/>
       <FlatList
         style={styles.list}
@@ -135,6 +135,12 @@ const styles = StyleSheet.create({
   list: {
     width: 300,
     height: 400,
+  },
+  flatListContainer:{
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 300,
+    width: '100%'
   },
   square: {
     height: 100,
