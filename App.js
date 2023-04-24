@@ -9,19 +9,35 @@ import {
 } from "react-native";
 
 export default function App() {
-  const [notification, setNotification] = useState("Player X to start");
+  const [notification, setNotification] = useState("Player X starts");
   const [refresh, setRefresh] = useState(false);
   const [board, setBoard] = useState([
-    "X",
-    " ",
-    " ",
-    " ",
-    "O",
-    " ",
-    " ",
-    " ",
-    " X",
+    " "," "," ",
+    " "," "," ",
+    " "," "," ",
   ]);
+
+  const [ currentPlayer, setCurrentPlayer] = useState("X")
+
+  const pressField = (index) =>{
+    let newBoard = board
+
+  if(newBoard[index] !== "X" && newBoard[index] !== "O"){
+    if(currentPlayer == "X"){
+      newBoard[index] = "X"
+      setCurrentPlayer("O")
+      setNotification("Player O turn")
+    }else{
+      newBoard[index] = "O"
+      setCurrentPlayer("X")
+      setNotification("Player X turn")
+    }
+
+    setBoard(newBoard)
+    setRefresh(!refresh)
+  }
+    
+  }
 
   return (
     <View style={styles.container}>
@@ -33,9 +49,9 @@ export default function App() {
         data={board}
         numColumns={3}
         extraData={refresh}
-        renderItem={({item, inde}) => (
-          <TouchableOpacity style={styles.square}>
-            <Text>{item}</Text>
+        renderItem={({item, index}) => (
+          <TouchableOpacity style={styles.square} onPress={() => pressField(index)}>
+            <Text style={styles.txt2}>{item}</Text>
           </TouchableOpacity>
         )}
       />
