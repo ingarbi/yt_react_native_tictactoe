@@ -5,7 +5,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
+  View, Image
 } from "react-native";
 
 export default function App() {
@@ -75,9 +75,13 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      <Image source={require('./assets/bg2.jpg')} style={styles.image2}/>
       <StatusBar style="auto" />
       <Text style={styles.txt1}>TicTacToe</Text>
       <Text style={styles.txt2}>{notification}</Text>
+      
+      <View>
+      <Image source={require('./assets/bg.png')} style={styles.image}/>
       <FlatList
         style={styles.list}
         data={board}
@@ -88,10 +92,12 @@ export default function App() {
             style={styles.square}
             onPress={() => pressField(index)}
           >
-            <Text style={styles.txt2}>{item}</Text>
+            <Text style={styles.txtXO}>{item}</Text>
           </TouchableOpacity>
         )}
       />
+      </View>
+      
     </View>
   );
 }
@@ -105,9 +111,19 @@ const styles = StyleSheet.create({
   },
   txt1: {
     fontSize: 50,
+    position: 'absolute',
+    top:60,
+    color:"white"
   },
   txt2: {
     fontSize: 20,
+    position: 'absolute',
+    top:130,
+    color:"white"
+  },
+  txtXO:{
+    fontSize: 50,
+    color:"white"
   },
   button1: {
     backgroundColor: "blue",
@@ -121,9 +137,21 @@ const styles = StyleSheet.create({
     height: 400,
   },
   square: {
-    height: 60,
-    width: 40,
-    backgroundColor: "blue",
-    margin: 10,
+    height: 100,
+    width: 100,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  image2:{
+    width:"100%",
+    height:"100%",
+    position: 'absolute',
+    zIndex:-1,
+  },
+  image:{
+    width:300,
+    height:300,
+    position: 'absolute',
+
   },
 });
